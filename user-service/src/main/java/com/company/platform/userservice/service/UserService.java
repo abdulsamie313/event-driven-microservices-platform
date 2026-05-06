@@ -40,13 +40,13 @@ public class UserService {
         UserCreatedEvent event = buildUserCreatedEvent(savedUser);
         userEventProducer.publishUserCreatedEvent(event);
 
-        return new UserResponse(savedUser.getId(), savedUser.getName());
+        return new UserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
     }
 
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(user -> new UserResponse(user.getId(), user.getName()))
+                .map(user -> new UserResponse(user.getId(), user.getName(), user.getEmail()))
                 .toList();
     }
 
@@ -58,7 +58,7 @@ public class UserService {
 
         User updatedUser = userRepository.save(user);
 
-        return new UserResponse(updatedUser.getId(), updatedUser.getName());
+        return new UserResponse(updatedUser.getId(), updatedUser.getName(), updatedUser.getEmail());
     }
 
     public void deleteUser(Long id) {
@@ -72,7 +72,7 @@ public class UserService {
         Pageable pageable = PageRequest.of(page, size);
 
         return userRepository.findAll(pageable)
-                .map(user -> new UserResponse(user.getId(), user.getName()));
+                .map(user -> new UserResponse(user.getId(), user.getName(), user.getEmail()));
     }
 
     public Page<UserResponse> searchUsersByName(String name, int page, int size) {
@@ -80,7 +80,7 @@ public class UserService {
 
         return userRepository
                 .findByNameContainingIgnoreCase(name, pageable)
-                .map(user -> new UserResponse(user.getId(), user.getName()));
+                .map(user -> new UserResponse(user.getId(), user.getName(), user.getEmail()));
     }
 
     public String loginUser(LoginRequest request) {
