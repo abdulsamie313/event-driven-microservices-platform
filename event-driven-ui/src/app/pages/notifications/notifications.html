@@ -1,0 +1,29 @@
+<div class="container mt-4">
+
+  <h2 class="mb-4">Notifications</h2>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let notification of notifications">
+        <td>{{ notification.id }}</td>
+        <td>{{ notification.userId }}</td>
+        <td>{{ notification.email }}</td>
+        <td>{{ notification.message }}</td>
+        <td>{{ notification.createdAt }}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<nav class="navbar">
+  <div class="navbar-title">
+    Event Driven Microservices
+  </div>
+
+  <div class="navbar-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Create User
+    </a>
+
+    <a routerLink="/notifications" routerLinkActive="active">
+      Notifications
+    </a>
+
+    <a routerLink="/analytics" routerLinkActive="active">
+      Analytics
+    </a>
+  </div>
+</nav>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

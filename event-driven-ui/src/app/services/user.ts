@@ -9,13 +9,13 @@ import { CreateUserRequest, UserResponse } from '../models/user.model';
 export class User {
   private apiUrl = 'http://localhost:8080/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createUser(request: CreateUserRequest): Observable<UserResponse> {
     return this.http.post<UserResponse>(this.apiUrl, request);
   }
 
   getUsers(): Observable<UserResponse[]> {
-  return this.http.get<UserResponse[]>(this.apiUrl);
-}
+    return this.http.get<UserResponse[]>(this.apiUrl);
+  }
 }

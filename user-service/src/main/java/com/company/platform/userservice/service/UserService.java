@@ -14,10 +14,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 @Service
 public class UserService {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -37,7 +43,12 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
+        log.info("User saved successfully with ID: {}", savedUser.getId());
+
         UserCreatedEvent event = buildUserCreatedEvent(savedUser);
+
+        log.info("Publishing Kafka event for user: {}", savedUser.getEmail());
+
         userEventProducer.publishUserCreatedEvent(event);
 
         return new UserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail());

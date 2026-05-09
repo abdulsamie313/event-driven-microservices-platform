@@ -1,0 +1,31 @@
+<div class="container mt-4">
+
+  <h2 class="mb-4">Analytics Events</h2>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Event Type</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of analyticsEvents">
+        <td>{{ event.id }}</td>
+        <td>{{ event.userId }}</td>
+        <td>{{ event.name }}</td>
+        <td>{{ event.email }}</td>
+        <td>{{ event.eventType }}</td>
+        <td>{{ event.createdAt }}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
