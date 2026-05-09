@@ -2,7 +2,7 @@
 
 A scalable event-driven microservices platform built using Spring Boot, Apache Kafka, PostgreSQL, Docker, and Angular.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Backend
 - Java 17
@@ -23,7 +23,7 @@ A scalable event-driven microservices platform built using Spring Boot, Apache K
 
 ---
 
-# 🏗️ Architecture
+# Architecture
 
 The platform follows an event-driven microservices architecture.
 
@@ -43,7 +43,7 @@ Consumes Kafka events for analytics and monitoring purposes.
 
 ---
 
-# 🔄 Event Flow
+# Event Flow
 
 1. User registers through API
 2. User Service saves user in PostgreSQL
@@ -53,7 +53,7 @@ Consumes Kafka events for analytics and monitoring purposes.
 
 ---
 
-# 🐳 Docker Compose
+# Docker Compose
 
 The project uses Docker Compose to orchestrate:
 
