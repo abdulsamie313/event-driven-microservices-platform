@@ -4,7 +4,9 @@ import com.company.platform.userservice.entity.User;
 import com.company.platform.userservice.model.UserRequest;
 import com.company.platform.userservice.model.UserResponse;
 import com.company.platform.userservice.repository.UserRepository;
+import com.company.platform.userservice.service.UserEventProducer;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -13,13 +15,16 @@ import static org.mockito.Mockito.when;
 
 class UserServiceTest {
 
+    @Mock
+    private UserEventProducer userEventProducer;
+
     @Test
     void shouldCreateUser() {
-        // Arrange
         UserRepository userRepository = Mockito.mock(UserRepository.class);
         PasswordEncoder passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        UserEventProducer userEventProducer = Mockito.mock(UserEventProducer.class);
 
-        UserService userService = new UserService(userRepository, passwordEncoder);
+        UserService userService = new UserService(userRepository, passwordEncoder, userEventProducer);
 
         UserRequest request = new UserRequest();
         request.setName("Abdul");
