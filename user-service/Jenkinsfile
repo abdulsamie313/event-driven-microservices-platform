@@ -46,14 +46,14 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 echo 'Updating Kubernetes deployment image'
-                sh 'kubectl set image deployment/user-service user-service=$IMAGE_NAME:$IMAGE_TAG'
+                sh 'kubectl set image deployment/user-service user-service=$IMAGE_NAME:$IMAGE_TAG --insecure-skip-tls-verify'
             }
         }
 
         stage('Verify Rollout') {
             steps {
                 echo 'Checking rollout status'
-                sh 'kubectl rollout status deployment/user-service'
+                sh 'kubectl rollout status deployment/user-service --insecure-skip-tls-verify'
             }
         }
     }
