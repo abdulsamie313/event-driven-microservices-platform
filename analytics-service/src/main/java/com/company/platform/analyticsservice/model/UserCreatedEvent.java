@@ -9,12 +9,6 @@ public class UserCreatedEvent {
     public UserCreatedEvent() {
     }
 
-    public UserCreatedEvent(Long userId, String name, String email) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-    }
-
     public Long getUserId() {
         return userId;
     }
