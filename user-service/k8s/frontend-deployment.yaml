@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-driven-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-driven-ui
+  template:
+    metadata:
+      labels:
+        app: event-driven-ui
+    spec:
+      containers:
+        - name: event-driven-ui
+          image: abdulsamie313/event-driven-ui:1.0
+          ports:
+            - containerPort: 80

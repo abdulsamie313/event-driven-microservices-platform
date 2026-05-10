@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "55433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -30,7 +30,8 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   user-service:
@@ -50,6 +51,44 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     ports:
       - "8080:8080"
+
+  notification-service:
+    image: notification-service:1.0
+    build:
+      context: ../notification-service
+    container_name: notification-service-app
+    depends_on:
+      - postgres
+      - kafka
+    environment:
+      SPRING_PROFILES_ACTIVE: deployment
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+      - "8082:8082"
+
+  analytics-service:
+    image: analytics-service:1.0
+    build:
+      context: ../analytics-service
+    container_name: analytics-service-app
+    depends_on:
+      - postgres
+      - kafka
+    environment:
+      SPRING_PROFILES_ACTIVE: deployment
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    ports:
+      - "8083:8083"
+
+  frontend:
+    image: event-driven-ui:1.0
+    build:
+      context: ../event-driven-ui
+    container_name: event-driven-ui-app
+    depends_on:
+      - user-service
+    ports:
+      - "4200:80"
 
 
 volumes:
