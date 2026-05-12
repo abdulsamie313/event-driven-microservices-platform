@@ -63,11 +63,12 @@ pipeline {
 
         stage('Deploy With Docker Compose') {
             steps {
-                echo 'Deploying full platform with Docker Compose'
-                sh '''
-                docker-compose down
-                docker-compose up -d --build
-                '''
+        echo 'Deploying full platform with Docker Compose'
+        sh '''
+        ls -la
+        docker-compose -f user-service/docker-compose.yml down
+        docker-compose -f user-service/docker-compose.yml up -d --build
+        '''
             }
         }
 
