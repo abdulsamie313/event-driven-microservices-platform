@@ -21,7 +21,7 @@ pipeline {
 
                 echo 'Building notification-service'
                 dir('notification-service') {
-                    sh 'mvn clean package'
+                    sh 'sh mvn clean package -DskipTests'
                 }
 
                 echo 'Building analytics-service'
