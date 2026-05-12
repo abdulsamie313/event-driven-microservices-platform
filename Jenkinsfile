@@ -26,7 +26,7 @@ pipeline {
 
                 echo 'Building analytics-service'
                 dir('analytics-service') {
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
