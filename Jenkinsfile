@@ -62,14 +62,14 @@ pipeline {
         }
 
         stage('Deploy With Docker Compose') {
-    steps {
+            steps {
         echo 'Deploying full platform with Docker Compose'
         sh '''
         docker-compose -f docker-compose.yml down
         docker-compose -f docker-compose.yml up -d --build
         '''
+            }
         }
-    }
 
         stage('Verify Containers') {
             steps {
