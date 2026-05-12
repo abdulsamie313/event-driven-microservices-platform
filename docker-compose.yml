@@ -35,9 +35,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   user-service:
-    image: user-service:1.0
-    build: .
-    container_name: user-service-app
+  image: abdulsamie313/user-service:latest
+  build:
+    context: ./user-service
     depends_on:
       - postgres
       - kafka
@@ -52,10 +52,10 @@ services:
     ports:
       - "8080:8080"
 
-  notification-service:
-    image: notification-service:1.0
-    build:
-      context: ../notification-service
+    notification-service:
+    image: abdulsamie313/notification-service:latest
+  build:
+    context: ./notification-service
     container_name: notification-service-app
     depends_on:
       - postgres
@@ -66,10 +66,10 @@ services:
     ports:
       - "8082:8082"
 
-  analytics-service:
-    image: analytics-service:1.0
-    build:
-      context: ../analytics-service
+    analytics-service:
+    image: abdulsamie313/analytics-service:latest
+  build:
+    context: ./analytics-service
     container_name: analytics-service-app
     depends_on:
       - postgres
@@ -80,10 +80,10 @@ services:
     ports:
       - "8083:8083"
 
-  frontend:
-    image: event-driven-ui:1.0
-    build:
-      context: ../event-driven-ui
+    frontend:
+    image: abdulsamie313/event-driven-ui:latest
+  build:
+    context: ./event-driven-ui
     container_name: event-driven-ui-app
     depends_on:
       - user-service
